@@ -24,4 +24,8 @@ namespace ROIApplication.Model
        public double ProjectedROI { get; set; }
        public double ProjectedFees { get; set; }
     }
+
+    public class Investments { 
+        public List<Model.Investment> investment { get; set; }
+    }
 }

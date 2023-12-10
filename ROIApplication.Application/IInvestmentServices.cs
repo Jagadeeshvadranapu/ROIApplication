@@ -11,7 +11,7 @@ namespace ROIApplication.Application
     {
         //This interface is use for Bussiness Rule / USE CASE
         List<Model.InvestmentOption> GetInvestmentOptions();
-        Task<Model.ProjectROI> CalucateProjectedROI(List<Model.Investment> investments);
+        Task<Model.ProjectROI> CalucateProjectedROI(Model.Investments investments);
         Task<double> GetExchangeConvert(double amount, string from, string to);
     }
 }

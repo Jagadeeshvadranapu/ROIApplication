@@ -9,6 +9,7 @@ using RestSharp;
 using Newtonsoft.Json;
 using ROIApplication.Model;
 using FluentValidation.Results;
+using FluentValidation;
 
 namespace ROIApplication.Application
 {
@@ -61,31 +62,30 @@ namespace ROIApplication.Application
             return convertedAmount;
 
         }
-        public async Task<Model.ProjectROI> CalucateProjectedROI(List<Model.Investment> Investment) {
+        public async Task<Model.ProjectROI> CalucateProjectedROI(Model.Investments Investments) {
+
             List<Model.InvestmentOption> options = this._investmentRepository.GetInvestmentOptions();
             Model.InvestmentOption option = new InvestmentOption();
             ProjectROI projectROI = new ProjectROI();
-            InvestmentValidator validator = new InvestmentValidator();
-            double roi = 0;
-            double fee = 0;
-            foreach (var investment in Investment)
-            {
-               ValidationResult validationResult = validator.Validate(investment);
-                if (validationResult.IsValid)
-                {
+
+            InvestmentsValidator validator = new InvestmentsValidator();
+            ValidationResult validationResult = validator.Validate(Investments);
+            double roi = 0, fee = 0;
+            if (validationResult.IsValid) {
+
+                foreach (var investment in Investments.investment) {
                     option = options.Where(x => x.Option.ToLower() == investment.Option.ToLower()).First();
                     projectROI = this.Calucate(investment, option);
                     roi += projectROI.ProjectedROI;
                     fee += projectROI.ProjectedFees;
                 }
-                else
-                {
-                    return null;
-                }
-
+                double convertedRate = await this.GetExchangeConvert((fee + 250), "USD", "AUD");
+                projectROI = new ProjectROI() { ProjectedROI = Math.Round(roi, 2), ProjectedFees = Math.Round(convertedRate, 2) };
             }
-            double convertedRate = await this.GetExchangeConvert((fee + 250), "USD", "AUD");
-            projectROI = new ProjectROI() { ProjectedROI= Math.Round(roi,2), ProjectedFees= Math.Round(convertedRate,2) };
+            else
+            {
+                throw new ValidationException(validationResult.Errors);
+            }
             return projectROI;
         }
         private Model.ProjectROI Calucate(Investment investment, Model.InvestmentOption option) {
@@ -135,5 +135,7 @@ namespace ROIApplication.Application
             ProjectROI projectROI = new ProjectROI() { ProjectedROI = projectedROI, ProjectedFees = projectFee };
             return projectROI;
         }
+       
+       
     }
 }

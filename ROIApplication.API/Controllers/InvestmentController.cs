@@ -12,12 +12,12 @@ namespace ROIApplication.API.Controllers
     public class InvestmentController : ControllerBase
     {
         private readonly IInvestmentServices investmentServices;
-        private readonly InvestmentValidator investmentValidator;
+       // private readonly InvestmentValidator investmentValidator;
 
-        public InvestmentController(IInvestmentServices investmentServices, InvestmentValidator investmentValidator)
+        public InvestmentController(IInvestmentServices investmentServices)
         {
             this.investmentServices = investmentServices;
-            this.investmentValidator = investmentValidator;
+           // this.investmentValidator = investmentValidator;
         }
 
         [HttpGet("GetInvestmentOptions")]
@@ -46,10 +46,10 @@ namespace ROIApplication.API.Controllers
 
         }
         [HttpPost("CalucateProjectedROI")]
-        public async Task<IActionResult> CalucateProjectedROI([FromBody] List<Model.Investment> Investment) {
+        public async Task<IActionResult> CalucateProjectedROI([FromBody] Model.Investments Investments) {
             try {
-                    ProjectROI projectROI =  await this.investmentServices.CalucateProjectedROI(Investment);
-                    return Ok(projectROI);
+                 ProjectROI projectROI =  await this.investmentServices.CalucateProjectedROI(Investments);
+                return Ok(projectROI);
             }
             catch (Exception ex)
             {

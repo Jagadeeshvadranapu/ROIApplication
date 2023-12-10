@@ -1,6 +1,8 @@
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using ROIApplication.Application;
 using ROIApplication.Data;
 using System.Reflection;
@@ -10,7 +12,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers()
-    .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<InvestmentValidator>());
+    .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<InvestmentsValidator>())
+   .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<InvestmentValidator>());
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -41,7 +45,8 @@ app.UseCors(
     options => options.WithOrigins("*")
                       .AllowAnyHeader()
                       .AllowAnyMethod()
-    );
+                      .AllowAnyOrigin()
+    ) ;
 
 
 app.UseHttpsRedirection();
