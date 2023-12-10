@@ -79,8 +79,11 @@ namespace ROIApplication.Application
                     roi += projectROI.ProjectedROI;
                     fee += projectROI.ProjectedFees;
                 }
-                double convertedRate = await this.GetExchangeConvert((fee + 250), "USD", "AUD");
-                projectROI = new ProjectROI() { ProjectedROI = Math.Round(roi, 2), ProjectedFees = Math.Round(convertedRate, 2) };
+                if (roi > 0)
+                {
+                    double convertedRate = await this.GetExchangeConvert((fee + 250), "USD", "AUD");
+                    projectROI = new ProjectROI() { ProjectedROI = Math.Round(roi, 2), ProjectedFees = Math.Round(convertedRate, 2) };
+                }
             }
             else
             {
