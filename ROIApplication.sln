@@ -9,7 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ROIApplication.Application"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ROIApplication.Data", "ROIApplication.Data\ROIApplication.Data.csproj", "{078F03AC-BD90-4B1E-83F2-10F429AF770D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ROIApplication.API", "ROIApplication.API\ROIApplication.API.csproj", "{E2B2485A-609D-44CD-AA30-0A78D63E0072}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ROIApplication.API", "ROIApplication.API\ROIApplication.API.csproj", "{E2B2485A-609D-44CD-AA30-0A78D63E0072}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{633D8BBB-08FB-4BFD-B8BA-2A221A062353}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{E2B2485A-609D-44CD-AA30-0A78D63E0072}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2B2485A-609D-44CD-AA30-0A78D63E0072}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2B2485A-609D-44CD-AA30-0A78D63E0072}.Release|Any CPU.Build.0 = Release|Any CPU
+		{633D8BBB-08FB-4BFD-B8BA-2A221A062353}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{633D8BBB-08FB-4BFD-B8BA-2A221A062353}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{633D8BBB-08FB-4BFD-B8BA-2A221A062353}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{633D8BBB-08FB-4BFD-B8BA-2A221A062353}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
