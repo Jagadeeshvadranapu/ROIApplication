@@ -1,0 +1,6 @@
+@ROIApplication.API_HostAddress = http://localhost:5130
+
+GET {{ROIApplication.API_HostAddress}}/GetInvestmentOptions
+Accept: application/json
+
+###

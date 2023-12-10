@@ -1,0 +1,6 @@
+D:\Jagadeesh\ROIApplication\ROIApplication.Domain\bin\Debug\ROIApplication.Domain.dll
+D:\Jagadeesh\ROIApplication\ROIApplication.Domain\bin\Debug\ROIApplication.Domain.pdb
+D:\Jagadeesh\ROIApplication\ROIApplication.Domain\obj\Debug\ROIApplication.Model.csproj.AssemblyReference.cache
+D:\Jagadeesh\ROIApplication\ROIApplication.Domain\obj\Debug\ROIApplication.Model.csproj.CoreCompileInputs.cache
+D:\Jagadeesh\ROIApplication\ROIApplication.Domain\obj\Debug\ROIApplication.Domain.dll
+D:\Jagadeesh\ROIApplication\ROIApplication.Domain\obj\Debug\ROIApplication.Domain.pdb
