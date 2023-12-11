@@ -14,12 +14,12 @@ using FluentValidation;
 namespace ROIApplication.Application
 {
     //Implement Bussiness Rule / USE CASES
-    public class InvestmentService : IInvestmentServices
+    public class IInvestmentService : IInvestmentServices
     {
         private readonly IInvestmentRepository _investmentRepository;
         private static readonly string exchangerateAPI = "https://api.apilayer.com/exchangerates_data";
         private static readonly string exchangerateAPI_Key = "gps2n0OgdRsUE34sQPWdivLYNjWrXDxc";
-        public InvestmentService(IInvestmentRepository investmentRepository) {
+        public IInvestmentService(IInvestmentRepository investmentRepository) {
             this._investmentRepository = investmentRepository;
         }
         List<Model.InvestmentOption> IInvestmentServices.GetInvestmentOptions() {
@@ -92,45 +92,54 @@ namespace ROIApplication.Application
             return projectROI;
         }
         private Model.ProjectROI Calucate(Investment investment, Model.InvestmentOption option) {
-            double projectedROI = 0;
+            double projectedROI = 0, roi = 0;
             double projectFee = 0;
             switch (option.Option)
             {
                 case "Cash Investments":
-                    projectedROI += ((investment.Percentage <= 50 ? (investment.Amount * option.MinExcepted) : (investment.Amount * option.MaxExcepted)) / 100);
-                    projectFee += ((investment.Percentage <= 50 ? (investment.Amount * option.Fee) : (0)) / 100);
+                    roi = ((investment.Percentage <= 50 ? (investment.Amount * option.MinExcepted) : (investment.Amount * option.MaxExcepted)) / 100);
+                    projectedROI += roi;
+                    projectFee += ((investment.Percentage <= 50 ? (roi * option.Fee) : (0)) / 100);
                     break;
                 case "Fixed Interest":
-                    projectedROI += ((investment.Amount * option.MaxExcepted) / 100);
-                    projectFee += ((investment.Amount * option.Fee) / 100);
+                    roi = ((investment.Amount * option.MaxExcepted) / 100);
+                    projectedROI += roi;
+                    projectFee += ((roi * option.Fee) / 100);
                     break;
                 case "Shares":
-                    projectedROI += ((investment.Percentage <= 70 ? (investment.Amount * option.MinExcepted) : (investment.Amount * option.MaxExcepted)) / 100);
-                    projectFee += ((investment.Amount * option.Fee) / 100);
+                    roi = ((investment.Percentage <= 70 ? (investment.Amount * option.MinExcepted) : (investment.Amount * option.MaxExcepted)) / 100);
+                    projectedROI += roi;
+                    projectFee += ((roi * option.Fee) / 100);
                     break;
                 case "Managed Funds":
-                    projectedROI += ((investment.Amount * option.MaxExcepted) / 100);
-                    projectFee += ((investment.Amount * option.Fee) / 100);
+                    roi = ((investment.Amount * option.MaxExcepted) / 100);
+                    projectedROI += roi;
+                    projectFee += ((roi * option.Fee) / 100);
                     break;
                 case "Exchange Trade Funds":
-                    projectedROI += ((investment.Percentage <= 40 ? (investment.Amount * option.MinExcepted) : (investment.Amount * option.MaxExcepted)) / 100);
-                    projectFee += ((investment.Amount * option.Fee) / 100);
+                    roi = ((investment.Percentage <= 40 ? (investment.Amount * option.MinExcepted) : (investment.Amount * option.MaxExcepted)) / 100);
+                    projectedROI += roi;
+                    projectFee += ((roi * option.Fee) / 100);
                     break;
                 case "Investment Bonds":
-                    projectedROI += ((investment.Amount * option.MaxExcepted) / 100);
-                    projectFee += ((investment.Amount * option.Fee) / 100);
+                    roi = ((investment.Amount * option.MaxExcepted) / 100);
+                    projectedROI += roi;
+                    projectFee += ((roi * option.Fee) / 100);
                     break;
                 case "Annuities":
-                    projectedROI += ((investment.Amount * option.MaxExcepted) / 100);
-                    projectFee += ((investment.Amount * option.Fee) / 100);
+                    roi = ((investment.Amount * option.MaxExcepted) / 100);
+                    projectedROI += roi;
+                    projectFee += ((roi * option.Fee) / 100);
                     break;
                 case "Listed Investment Companies":
-                    projectedROI += ((investment.Amount * option.MaxExcepted) / 100);
-                    projectFee += ((investment.Amount * option.Fee) / 100);
+                    roi = ((investment.Amount * option.MaxExcepted) / 100);
+                    projectedROI += roi;
+                    projectFee += ((roi * option.Fee) / 100);
                     break;
                 case "Real Estate Investment Truest":
-                    projectedROI += ((investment.Amount * option.MaxExcepted) / 100);
-                    projectFee += ((investment.Amount * option.Fee) / 100);
+                    roi = ((investment.Amount * option.MaxExcepted) / 100);
+                    projectedROI += roi;
+                    projectFee += ((roi * option.Fee) / 100);
                     break;
 
             }

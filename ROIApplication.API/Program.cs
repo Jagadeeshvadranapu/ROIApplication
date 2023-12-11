@@ -28,7 +28,7 @@ builder.Services.ConfigureSwaggerGen(setup =>
 });
 
 builder.Services.AddScoped<IInvestmentRepository, InvestmentRepository>();
-builder.Services.AddScoped<IInvestmentServices, InvestmentService>();
+builder.Services.AddScoped<IInvestmentServices, IInvestmentService>();
 
 builder.Services.AddCors();
 
